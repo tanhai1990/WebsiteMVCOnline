@@ -8,7 +8,9 @@ class Session{
         if (session_id() == '') {
             session_start();
         }
-    } else {
+    } 
+    else 
+    {
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
@@ -29,7 +31,7 @@ class Session{
 
  public static function checkSession(){
     self::init();
-    if (self::get("login")== false) {
+    if (self::get("adminLogin")== false) {
      self::destroy();
      header("Location:login.php");
     }

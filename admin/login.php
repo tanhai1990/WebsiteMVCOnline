@@ -3,13 +3,13 @@ require_once "../classes/adminlogin.php";
 ?>
 
 <?php
-$classAdmin = new adminLogin();
+$adminLogin = new adminLogin();
 
 if(isset($_POST["btnLogin"])){
 	$adminUser = $_POST["AdminUser"];
 	$adminPass = md5($_POST["AdminPass"]);
 
-	$loginCheck = $classAdmin->admin_login($adminUser, $adminPass);
+	$loginCheck = $adminLogin->admin_login($adminUser, $adminPass);
 }
 ?>
 

@@ -1159,3 +1159,15 @@ td.details {
 
 .gallery-sand .sorting{background-color:white !important;}
 table.form select{width:200px;}
+
+.success{
+	font-size: 18px;
+	color: green;
+	font-weight: bold;
+}
+
+.error{
+	font-size: 18px;
+	color: red;
+	font-weight: bold;
+}
