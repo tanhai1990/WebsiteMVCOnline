@@ -2,6 +2,19 @@
 <?php include 'inc/sidebar.php';?>
 <?php include '../classes/brand.php';?>
 <?php include '../classes/category.php';?>
+<?php include '../classes/product.php';?>
+
+<?php
+if(isset($_POST["btnSave"])){
+    $productName = $_POST["prductName"];
+    $catName = $_POST["category"];
+    $brandName = $_POST["brand"];
+    $productDesc = $_POST["productDesc"];
+    $productType = $_POST["productType"];
+
+}
+
+?>
 
 <div class="grid_10">
     <div class="box round first grid">
@@ -24,18 +37,20 @@
                     </td>
                     <td>
                         <select id="select" name="category">
-                            <option>Select Category</option>
+                        <!-- Show category -->
+                            <option>----------Select Category----------</option>
                             <?php
                             $cat = new category();
-                            $catlist = $cat->ShowCategory();
-                            if($catlist){
-                                while($result = $catlist->fetch_assoc()){
+                            $catList = $cat->ShowCategory();
+                            if($catList){
+                                while($result = $catList->fetch_assoc()){
                             ?>
                             <option value="<?php echo $result['IDCat'] ?>"><?php echo $result['catName']; ?></option>
                             <?php
                                 }
                             }
                             ?>
+                        <!-- End show category -->
                         </select>
                     </td>
                 </tr>
@@ -45,10 +60,21 @@
                     </td>
                     <td>
                         <select id="select" name="brand">
-                            <option>Select Brand</option>
-                            <option value="1">Brand One</option>
-                            <option value="2">Brand Two</option>
-                            <option value="3">Brand Three</option>
+                            <option>----------Select Brand----------</option>
+                            <!-- Show brand -->
+                            <?php
+                            $brand = new brand();
+                            $brandList = $brand->ShowBrand();
+                            if($brandList){
+                                while($result = $brandList->fetch_assoc()){
+                            
+                            ?>
+                            <option value="<?php echo $result['IDBrand'] ?>"><?php echo $result['brandName']; ?></option>
+                            <?php
+                                }
+                            }
+                            ?>
+                            <!-- End show brand -->
                         </select>
                     </td>
                 </tr>
@@ -58,7 +84,7 @@
                         <label>Description</label>
                     </td>
                     <td>
-                        <textarea class="tinymce" name="productName"></textarea>
+                        <textarea class="tinymce" name="productDesc"></textarea>
                     </td>
                 </tr>
 				<tr>
@@ -95,7 +121,7 @@
 				<tr>
                     <td></td>
                     <td>
-                        <input type="submit" name="submit" Value="Save" />
+                        <input type="submit" name="btnSave" Value="Save" />
                     </td>
                 </tr>
             </table>
