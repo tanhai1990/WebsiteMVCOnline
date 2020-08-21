@@ -7,23 +7,23 @@ require "../classes/brand.php";
 $brand = new brand();
 if(isset($_POST["btnSave"])){
     $brandName = $_POST["brandName"];
-    $insertCat = $brand->InsertCategory($catName);
-}*/
+    $insertBrand = $brand->InsertBrand($brandName);
+}
 ?>
         <div class="grid_10">
             <div class="box round first grid">
                 <h2>Thêm thương hiệu</h2>
                 <div class="block copyblock"> 
                 <?php
-                /*if(isset($insertCat)){
-                    echo $insertCat;
-                }*/
+                if(isset($insertBrand)){
+                    echo $insertBrand;
+                }
                 ?>
                  <form action="brandadd.php" method="POST">
                     <table class="form">					
                         <tr>
                             <td>
-                                <input type="text" name="catName" placeholder="Thêm thương hiệu sản phẩm..." class="medium" />
+                                <input type="text" name="brandName" placeholder="Thêm thương hiệu sản phẩm..." class="medium" />
                             </td>
                         </tr>
 						<tr> 

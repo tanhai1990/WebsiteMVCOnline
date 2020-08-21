@@ -1,8 +1,11 @@
 ﻿<?php include 'inc/header.php';?>
 <?php include 'inc/sidebar.php';?>
+<?php include '../classes/brand.php';?>
+<?php include '../classes/category.php';?>
+
 <div class="grid_10">
     <div class="box round first grid">
-        <h2>Add New Product</h2>
+        <h2>Thêm sản phẩm</h2>
         <div class="block">               
          <form action="" method="post" enctype="multipart/form-data">
             <table class="form">
@@ -12,7 +15,7 @@
                         <label>Name</label>
                     </td>
                     <td>
-                        <input type="text" placeholder="Enter Product Name..." class="medium" />
+                        <input type="text" name="productName" placeholder="Enter Product Name..." class="medium" />
                     </td>
                 </tr>
 				<tr>
@@ -20,11 +23,19 @@
                         <label>Category</label>
                     </td>
                     <td>
-                        <select id="select" name="select">
+                        <select id="select" name="category">
                             <option>Select Category</option>
-                            <option value="1">Category One</option>
-                            <option value="2">Category Two</option>
-                            <option value="3">Category Three</option>
+                            <?php
+                            $cat = new category();
+                            $catlist = $cat->ShowCategory();
+                            if($catlist){
+                                while($result = $catlist->fetch_assoc()){
+                            ?>
+                            <option value="<?php echo $result['IDCat'] ?>"><?php echo $result['catName']; ?></option>
+                            <?php
+                                }
+                            }
+                            ?>
                         </select>
                     </td>
                 </tr>
@@ -33,7 +44,7 @@
                         <label>Brand</label>
                     </td>
                     <td>
-                        <select id="select" name="select">
+                        <select id="select" name="brand">
                             <option>Select Brand</option>
                             <option value="1">Brand One</option>
                             <option value="2">Brand Two</option>
@@ -47,7 +58,7 @@
                         <label>Description</label>
                     </td>
                     <td>
-                        <textarea class="tinymce"></textarea>
+                        <textarea class="tinymce" name="productName"></textarea>
                     </td>
                 </tr>
 				<tr>
@@ -55,7 +66,7 @@
                         <label>Price</label>
                     </td>
                     <td>
-                        <input type="text" placeholder="Enter Price..." class="medium" />
+                        <input type="text" name="productPrice" placeholder="Enter Price..." class="medium" />
                     </td>
                 </tr>
             
@@ -64,7 +75,7 @@
                         <label>Upload Image</label>
                     </td>
                     <td>
-                        <input type="file" />
+                        <input type="file" name="image"/>
                     </td>
                 </tr>
 				
@@ -73,10 +84,10 @@
                         <label>Product Type</label>
                     </td>
                     <td>
-                        <select id="select" name="select">
+                        <select id="select" name="productType">
                             <option>Select Type</option>
                             <option value="1">Featured</option>
-                            <option value="2">Non-Featured</option>
+                            <option value="0">Non-Featured</option>
                         </select>
                     </td>
                 </tr>
