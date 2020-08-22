@@ -17,7 +17,7 @@ Class Database{
         $this->connectDB();
     }
  
-    private function connectDB(){
+    public function connectDB(){
         $this->link = new mysqli($this->host, $this->user, $this->pass, 
         $this->dbname);
         if(!$this->link){

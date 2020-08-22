@@ -5,7 +5,7 @@
 ?>
 
 <?php 
-class category
+class product
 {
     private $db;
     private $fm;
@@ -15,25 +15,42 @@ class category
         $this->fm = new Format();
     }
 
-    public function InsertProduct($catName){
-        $catName = $this->fm->validation($catName);
-       
+    public function InsertProduct($data, $files){
+        $productName = mysqli_real_escape_string($this->db->link, $data['productName']);
+        $catName = mysqli_real_escape_string($this->db->link, $data['category']);
+        $brandName = mysqli_real_escape_string($this->db->link, $data['brand']);
+        $productDesc = mysqli_real_escape_string($this->db->link, $data['productDesc']);
+        $productPrice = mysqli_real_escape_string($this->db->link, $data['productPrice']);
+        $productType = mysqli_real_escape_string($this->db->link, $data['productType']);
 
-        if(empty($catName)){
-            $alert = "<span class='error'>Category must be not empty</span>";
+        // Kiem tra hinh anh va lay hinh anh cho vao folder upload
+        $permited = array('jpg','jpeg','png','gif');
+        $fileName = $_FILES['image']['name'];
+        $fileName = $_FILES['image']['size'];
+        $fileName = $_FILES['image']['tmp_name'];
+
+        $div = explode('.', $fileName);
+        $fileExt = strtolower(end($div));
+        $uniqueImage = substr(md5(time()), 0, 10).'.'.$fileExt;
+        $uploadedImage = "uploads/".$uniqueImage;
+
+
+        if($productName=="" || $brandName =="" || $catName == "" || $productDesc == "" || $productPrice == "" || $productType == "" || $fileName == ""){
+            $alert = "<span class='error'>fields must be not empty</span>";
             return $alert;
         }else{
+            move_uploaded_file($file_temp, $uploadedImage);
             $sql = "
-                INSERT INTO category(catName)
-                VALUES('$catName')
+                INSERT INTO product(productName, IDCat, IDBrand, productDesc, productType, productPrice, image)
+                VALUES('$productName','$catName', '$brandName', '$productDesc', '$productType', '$productPrice', '$uniqueImage')
             ";
             $result = $this->db->insert($sql);
 
             if($result){
-                $alert = "<span class='success'>Insert category successfully</span>";
+                $alert = "<span class='success'>Insert productsuccessfully</span>";
                 return $alert;
             }else{
-                $alert = "<span class='error'>Insert category not successfully</span>";
+                $alert = "<span class='error'>Insert product not successfully</span>";
                 return $alert;
             }
 
@@ -50,9 +67,9 @@ class category
     //     return $result;
     // }
 
-    //End Show category
+    // //End Show category
 
-    //Edit category
+    // //Edit category
     // public function GetCatByID($IDCat){
     //     $sql = "
     //             SELECT * FROM category 
@@ -87,10 +104,10 @@ class category
     //     }
     // }
 
-    //End Edit category
+    // //End Edit category
 
 
-    //Delete category
+    // //Delete category
     // public function DeleteCategory($IDDel){
     //     $sql = "
     //         DELETE FROM category 
@@ -106,7 +123,7 @@ class category
     //     }
     // }
 
-    //End Delete category
+    // //End Delete category
 
 
 }
