@@ -5,7 +5,7 @@
 ?>
 
 <?php 
-class product
+class Product
 {
     private $db;
     private $fm;
@@ -58,51 +58,53 @@ class product
     }
 
     //Show category
-    // public function ShowCategory(){
-    //     $sql = "
-    //             SELECT * FROM category 
-    //             ORDER BY IDCat DESC
-    //     ";
-    //     $result = $this->db->select($sql);
-    //     return $result;
-    // }
+    public function ShowProduct(){
+        $sql = "
+                SELECT product.*, brand.brandName, category.catName FROM product
+                INNER JOIN category ON product.IDCat = category.IDCat
+                INNER JOIN brand ON product.IDBrand = brand.IDBrand
+                ORDER BY IDProduct DESC
+        ";
+        $result = $this->db->select($sql);
+        return $result;
+    }
 
     // //End Show category
 
     // //Edit category
-    // public function GetCatByID($IDCat){
-    //     $sql = "
-    //             SELECT * FROM category 
-    //             WHERE IDCat = '$IDCat'
-    //     ";
-    //     $result = $this->db->select($sql);
-    //     return $result;
-    // }
+    public function GetProductByID($IDProduct){
+        $sql = "
+                SELECT * FROM product 
+                WHERE IDProduct = '$IDProduct'
+        ";
+        $result = $this->db->select($sql);
+        return $result;
+    }
 
-    // public function UpdateCategory($IDCat, $catName){
-    //     $catName = $this->fm->validation($catName);
+    public function UpdateProduct($IDCat, $catName){
+        $catName = $this->fm->validation($catName);
 
-    //     if(empty($catName)){
-    //         $alert = "<span class='error'>Category must be not empty</span>";
-    //         return $alert;
-    //     }else{
-    //         $sql = "
-    //             UPDATE category
-    //             SET catName = '$catName'
-    //             WHERE IDCat = '$IDCat'
-    //         ";
-    //         $result = $this->db->update($sql);
+        if(empty($catName)){
+            $alert = "<span class='error'>Category must be not empty</span>";
+            return $alert;
+        }else{
+            $sql = "
+                UPDATE category
+                SET catName = '$catName'
+                WHERE IDCat = '$IDCat'
+            ";
+            $result = $this->db->update($sql);
 
-    //         if($result){
-    //             $alert = "<span class='success'>Update category successfully</span>";
-    //             return $alert;
-    //         }else{
-    //             $alert = "<span class='error'>Update category not success</span>";
-    //             return $alert;
-    //         }
+            if($result){
+                $alert = "<span class='success'>Update category successfully</span>";
+                return $alert;
+            }else{
+                $alert = "<span class='error'>Update category not success</span>";
+                return $alert;
+            }
 
-    //     }
-    // }
+        }
+    }
 
     // //End Edit category
 

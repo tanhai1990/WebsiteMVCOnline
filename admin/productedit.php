@@ -1,4 +1,4 @@
-﻿<?php include 'inc/header.php';?>
+<?php include 'inc/header.php';?>
 <?php include 'inc/sidebar.php';?>
 <?php include '../classes/brand.php';?>
 <?php include '../classes/category.php';?>
@@ -6,22 +6,43 @@
 
 <?php
 $pd = new Product();
-if(isset($_POST['btnSave'])){
-    $insertProduct = $pd->InsertProduct($_POST, $_FILES);
+// if(isset($_POST['btnSave'])){
+//     $insertProduct = $pd->InsertProduct($_POST, $_FILES);
+// }
+
+
+if(!isset($_GET["IDProduct"]) || $_GET["IDProduct"]==NULL){
+    echo "<script>'window.location = 'productlist.php' '</script>";
+}else{
+    $IDProduct = $_GET["IDProduct"];
+}
+
+if(isset($_POST["btnUpdate"])){
+    $updateProduct = $pd->UpdateProduct($_POST, $_FILES, $IDProduct);
 }
 
 ?>
 
 <div class="grid_10">
     <div class="box round first grid">
-        <h2>Thêm sản phẩm</h2>
-        <div class="block">               
-         <form action="productadd.php" method="post" enctype="multipart/form-data">
+        <h2>Sửa sản phẩm</h2>
+        <div class="block"> 
             <?php
-            if(isset($insertProduct)){
-                echo $insertProduct;
+            if(isset($updateProduct)){
+                echo $updateProduct;
             }
+
             ?>
+
+            <?php
+            $getProductByID = $pd->GetProductByID($IDProduct);
+            if($getProductByID){
+                while($resultProduct = $getProductByID->fetch_assoc()){
+            
+            
+            ?>              
+         <form action="productedit.php" method="post" enctype="multipart/form-data">
+            
             <table class="form">
                
                 <tr>
@@ -29,7 +50,7 @@ if(isset($_POST['btnSave'])){
                         <label>Name</label>
                     </td>
                     <td>
-                        <input type="text" name="productName" placeholder="Enter Product Name..." class="medium" />
+                        <input type="text" value="<?php echo $resultProduct['productName']; ?>" name="productName" placeholder="Enter Product Name..." class="medium" />
                     </td>
                 </tr>
 				<tr>
@@ -120,11 +141,15 @@ if(isset($_POST['btnSave'])){
 				<tr>
                     <td></td>
                     <td>
-                        <input type="submit" name="btnSave" Value="Save" />
+                        <input type="submit" name="btnUpdate" Value="Update" />
                     </td>
                 </tr>
             </table>
             </form>
+            <?php
+                }
+            }
+            ?>
         </div>
     </div>
 </div>
