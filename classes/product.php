@@ -26,8 +26,8 @@ class Product
         // Kiem tra hinh anh va lay hinh anh cho vao folder upload
         $permited = array('jpg','jpeg','png','gif');
         $fileName = $_FILES['image']['name'];
-        $fileName = $_FILES['image']['size'];
-        $fileName = $_FILES['image']['tmp_name'];
+        $fileSize = $_FILES['image']['size'];
+        $fileTemp = $_FILES['image']['tmp_name'];
 
         $div = explode('.', $fileName);
         $fileExt = strtolower(end($div));
@@ -39,7 +39,7 @@ class Product
             $alert = "<span class='error'>fields must be not empty</span>";
             return $alert;
         }else{
-            move_uploaded_file($file_temp, $uploadedImage);
+            move_uploaded_file($fileTemp, $uploadedImage);
             $sql = "
                 INSERT INTO product(productName, IDCat, IDBrand, productDesc, productType, productPrice, image)
                 VALUES('$productName','$catName', '$brandName', '$productDesc', '$productType', '$productPrice', '$uniqueImage')

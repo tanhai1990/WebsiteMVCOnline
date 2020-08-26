@@ -103,7 +103,7 @@ if(isset($_POST["btnUpdate"])){
                         <label>Description</label>
                     </td>
                     <td>
-                        <textarea class="tinymce" name="productDesc"></textarea>
+                        <textarea class="tinymce" name="productDesc"><?php echo $resultProduct['productDesc']; ?></textarea>
                     </td>
                 </tr>
 				<tr>
@@ -111,7 +111,7 @@ if(isset($_POST["btnUpdate"])){
                         <label>Price</label>
                     </td>
                     <td>
-                        <input type="text" name="productPrice" placeholder="Enter Price..." class="medium" />
+                        <input type="text" value="<?php echo $resultProduct['productPrice']; ?>" name="productPrice" class="medium" />
                     </td>
                 </tr>
             

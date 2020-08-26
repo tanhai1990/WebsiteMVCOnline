@@ -21,6 +21,7 @@ $pd = new Product();
 					<th>Description</th>
 					<th>Type</th>
 					<th>Price</th>
+					<th>Image</th>
 					<th>Action</th>
 				</tr>
 			</thead>
@@ -40,7 +41,8 @@ $pd = new Product();
 					<td><?php echo $resultProduct['brandName']; ?></td>
 					<td><?php echo $resultProduct['productDesc']; ?></td>
 					<td><?php echo $resultProduct['productType']; ?></td>
-					<td><?php echo $resultProduct['productPrice']; ?></td>
+					<td> <img src="uploads/<?php echo $resultProduct['image'];?>" width="80" alt=""></td>
+					<td><?php echo $resultProduct['image']; ?></td>
 					<td><a href="productedit.php?IDProduct=<?php echo $resultProduct['IDProduct']; ?>">Edit</a> 
 					|| <a href="?IDProduct=<?php echo $resultProduct['IDProduct']; ?>">Delete</a></td>
 				</tr>
