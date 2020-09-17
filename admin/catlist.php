@@ -1,27 +1,9 @@
 ﻿<?php include 'inc/header.php';?>
 <?php include 'inc/sidebar.php';?>
-<?php
-    require_once "../classes/category.php";
-?>
-
-<?php
-$cat = new category();
-
-if(isset($_GET["IDDelete"])){
-	$IDDel = $_GET["IDDelete"];
-	$delCat = $cat->DeleteCategory($IDDel);
-}
-
-?>
         <div class="grid_10">
             <div class="box round first grid">
                 <h2>Category List</h2>
-                <div class="block">
-					<?php
-					if(isset($delCat)){
-						echo $delCat;
-					}
-					?>        
+                <div class="block">        
                     <table class="data display datatable" id="example">
 					<thead>
 						<tr>
@@ -31,24 +13,46 @@ if(isset($_GET["IDDelete"])){
 						</tr>
 					</thead>
 					<tbody>
-					<?php
-					$rowCat = $cat->ShowCategory();
-					if($rowCat){
-						$i=0;
-						while($result = $rowCat->fetch_assoc()){
-							$i++;
-					
-					?>
 						<tr class="odd gradeX">
-							<td><?php echo $i; ?></td>
-							<td><?php echo $result['catName']; ?></td>
-							<td><a href="catedit.php?IDCat=<?php echo $result['IDCat'] ?>">Edit</a> || 
-							<a onclick="return confirm('Are you want to delete?')" href="catlist.php?IDDelete=<?php echo $result['IDCat'] ?>">Delete</a></td>
+							<td>01</td>
+							<td>Internet</td>
+							<td><a href="">Edit</a> || <a href="">Delete</a></td>
 						</tr>
-					<?php
-						}
-					}
-					?>
+						<tr class="even gradeC">
+							<td>02</td>
+							<td>Explorer </td>
+							<td><a href="">Edit</a> || <a href="">Delete</a></td>
+						</tr>
+						<tr class="odd gradeX">
+							<td>03</td>
+							<td>Internet</td>
+							<td><a href="">Edit</a> || <a href="">Delete</a></td>
+						</tr>
+						<tr class="even gradeC">
+							<td>04</td>
+							<td>Explorer </td>
+							<td><a href="">Edit</a> || <a href="">Delete</a></td>
+						</tr>
+							<tr class="odd gradeX">
+							<td>05</td>
+							<td>Internet</td>
+							<td><a href="">Edit</a> || <a href="">Delete</a></td>
+						</tr>
+						<tr class="even gradeC">
+							<td>06</td>
+							<td>Explorer </td>
+							<td><a href="">Edit</a> || <a href="">Delete</a></td>
+						</tr>
+						<tr class="odd gradeX">
+							<td>07</td>
+							<td>Internet</td>
+							<td><a href="">Edit</a> || <a href="">Delete</a></td>
+						</tr>
+						<tr class="even gradeC">
+							<td>08</td>
+							<td>Explorer </td>
+							<td><a href="">Edit</a> || <a href="">Delete</a></td>
+						</tr>
 					</tbody>
 				</table>
                </div>

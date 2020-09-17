@@ -1,27 +1,10 @@
 ﻿<?php include 'inc/header.php';?>
 <?php include 'inc/sidebar.php';?>
-<?php include '../classes/brand.php';?>
-<?php include '../classes/category.php';?>
-<?php include '../classes/product.php';?>
-
-<?php
-$pd = new Product();
-if(isset($_POST['btnSave'])){
-    $insertProduct = $pd->InsertProduct($_POST, $_FILES);
-}
-
-?>
-
 <div class="grid_10">
     <div class="box round first grid">
-        <h2>Thêm sản phẩm</h2>
+        <h2>Add New Product</h2>
         <div class="block">               
-         <form action="productadd.php" method="post" enctype="multipart/form-data">
-            <?php
-            if(isset($insertProduct)){
-                echo $insertProduct;
-            }
-            ?>
+         <form action="" method="post" enctype="multipart/form-data">
             <table class="form">
                
                 <tr>
@@ -29,7 +12,7 @@ if(isset($_POST['btnSave'])){
                         <label>Name</label>
                     </td>
                     <td>
-                        <input type="text" name="productName" placeholder="Enter Product Name..." class="medium" />
+                        <input type="text" placeholder="Enter Product Name..." class="medium" />
                     </td>
                 </tr>
 				<tr>
@@ -37,19 +20,11 @@ if(isset($_POST['btnSave'])){
                         <label>Category</label>
                     </td>
                     <td>
-                        <select id="select" name="category">
+                        <select id="select" name="select">
                             <option>Select Category</option>
-                            <?php
-                            $cat = new category();
-                            $catlist = $cat->ShowCategory();
-                            if($catlist){
-                                while($result = $catlist->fetch_assoc()){
-                            ?>
-                            <option value="<?php echo $result['IDCat'] ?>"><?php echo $result['catName']; ?></option>
-                            <?php
-                                }
-                            }
-                            ?>
+                            <option value="1">Category One</option>
+                            <option value="2">Category Two</option>
+                            <option value="3">Category Three</option>
                         </select>
                     </td>
                 </tr>
@@ -58,21 +33,11 @@ if(isset($_POST['btnSave'])){
                         <label>Brand</label>
                     </td>
                     <td>
-                        <select id="select" name="brand">
+                        <select id="select" name="select">
                             <option>Select Brand</option>
-                            <?php
-                            $brand = new brand();
-                            $brandList = $brand->ShowBrand();
-                            if($brandList){
-                                while($result = $brandList->fetch_assoc()){
-                            
-                            ?>
-                            <option value="<?php echo $result['IDBrand'] ?>"><?php echo $result['brandName'] ?></option>
-
-                            <?php
-                                }
-                            }
-                            ?>
+                            <option value="1">Brand One</option>
+                            <option value="2">Brand Two</option>
+                            <option value="3">Brand Three</option>
                         </select>
                     </td>
                 </tr>
@@ -82,7 +47,7 @@ if(isset($_POST['btnSave'])){
                         <label>Description</label>
                     </td>
                     <td>
-                        <textarea class="tinymce" name="productDesc"></textarea>
+                        <textarea class="tinymce"></textarea>
                     </td>
                 </tr>
 				<tr>
@@ -90,7 +55,7 @@ if(isset($_POST['btnSave'])){
                         <label>Price</label>
                     </td>
                     <td>
-                        <input type="text" name="productPrice" placeholder="Enter Price..." class="medium" />
+                        <input type="text" placeholder="Enter Price..." class="medium" />
                     </td>
                 </tr>
             
@@ -99,7 +64,7 @@ if(isset($_POST['btnSave'])){
                         <label>Upload Image</label>
                     </td>
                     <td>
-                        <input type="file" name="image"/>
+                        <input type="file" />
                     </td>
                 </tr>
 				
@@ -108,11 +73,10 @@ if(isset($_POST['btnSave'])){
                         <label>Product Type</label>
                     </td>
                     <td>
-                        <select id="select" name="productType">
-
+                        <select id="select" name="select">
                             <option>Select Type</option>
                             <option value="1">Featured</option>
-                            <option value="0">Non-Featured</option>
+                            <option value="2">Non-Featured</option>
                         </select>
                     </td>
                 </tr>
@@ -120,7 +84,7 @@ if(isset($_POST['btnSave'])){
 				<tr>
                     <td></td>
                     <td>
-                        <input type="submit" name="btnSave" Value="Save" />
+                        <input type="submit" name="submit" Value="Save" />
                     </td>
                 </tr>
             </table>

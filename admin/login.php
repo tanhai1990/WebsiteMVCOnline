@@ -1,18 +1,3 @@
-<?php 
-require_once "../classes/adminlogin.php";
-?>
-
-<?php
-$adminLogin = new adminLogin();
-
-if(isset($_POST["btnLogin"])){
-	$adminUser = $_POST["AdminUser"];
-	$adminPass = md5($_POST["AdminPass"]);
-
-	$loginCheck = $adminLogin->admin_login($adminUser, $adminPass);
-}
-?>
-
 <!DOCTYPE html>
 <head>
 <meta charset="utf-8">
@@ -22,23 +7,16 @@ if(isset($_POST["btnLogin"])){
 <body>
 <div class="container">
 	<section id="content">
-		<form action="login.php" method="post">
+		<form action="" method="post">
 			<h1>Admin Login</h1>
-			<span>
-			<?php if(isset($loginCheck))
-			{
-				echo $loginCheck;
-			}
-			?>
-			</span>
 			<div>
-				<input type="text" placeholder="Username" name="AdminUser"/>
+				<input type="text" placeholder="Username" required="" name="username"/>
 			</div>
 			<div>
-				<input type="password" placeholder="Password" name="AdminPass"/>
+				<input type="password" placeholder="Password" required="" name="password"/>
 			</div>
 			<div>
-				<input type="submit" value="Log in" name="btnLogin"/>
+				<input type="submit" value="Log in" />
 			</div>
 		</form><!-- form -->
 		<div class="button">
